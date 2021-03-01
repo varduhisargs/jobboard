@@ -142,6 +142,8 @@ CREATE TABLE `user` (
                         `facebook` varchar(255) DEFAULT NULL,
                         `twitter` varchar(255) DEFAULT NULL,
                         `whatsapp` varchar(255) DEFAULT NULL,
+                        `resume_id` bigint DEFAULT NULL,
+
                         PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
@@ -159,20 +161,20 @@ CREATE TABLE `user_role` (
 
 /*Data for the table `user_role` */
 
-/*Table structure for table `users-roles` */
+/*Table structure for table `users_roles` */
 
-DROP TABLE IF EXISTS `users-roles`;
+DROP TABLE IF EXISTS `users_roles`;
 
-CREATE TABLE `users-roles` (
+CREATE TABLE `users_roles` (
                                `user_id` bigint DEFAULT NULL,
                                `user_role_id` bigint DEFAULT NULL,
                                KEY `user_id` (`user_id`),
                                KEY `user_role_id` (`user_role_id`),
-                               CONSTRAINT `users-roles_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`),
-                               CONSTRAINT `users-roles_ibfk_2` FOREIGN KEY (`user_role_id`) REFERENCES `user_role` (`id`)
+                               CONSTRAINT `users_roles_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`),
+                               CONSTRAINT `users_roles_ibfk_2` FOREIGN KEY (`user_role_id`) REFERENCES `user_role` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
-/*Data for the table `users-roles` */
+/*Data for the table `users_roles` */
 
 /*Table structure for table `users_jobs` */
 
