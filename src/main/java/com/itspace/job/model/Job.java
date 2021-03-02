@@ -11,7 +11,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@ToString(exclude = "")
+@ToString(exclude = {"users","jobCategories"})
 public class Job {
 
     @Id

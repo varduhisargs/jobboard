@@ -10,7 +10,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@ToString(exclude = "")
+@ToString(exclude = "blogs")
 public class BlogCategory {
 
     @Id
