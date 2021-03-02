@@ -1,9 +1,6 @@
 package com.itspace.job.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.List;
@@ -13,6 +10,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+@ToString(exclude = {"userRoles","jobs"})
 public class User {
 
     @Id
@@ -28,7 +26,7 @@ public class User {
     private String twitter;
     private String whatsapp;
     @ManyToMany
-    @JoinTable(name = "users-roles", joinColumns = @JoinColumn(name = "user_id"),
+    @JoinTable(name = "users_roles", joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "user_role_id"))
     private List<UserRole> userRoles;
     @ManyToMany
@@ -36,6 +34,7 @@ public class User {
             inverseJoinColumns = @JoinColumn(name = "job_id"))
     private List<Job> jobs;
     @OneToOne
+    @JoinColumn(name = "resume_id", referencedColumnName = "id")
     private Resume resume;
 
 

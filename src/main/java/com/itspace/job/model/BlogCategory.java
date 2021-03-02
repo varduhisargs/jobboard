@@ -1,9 +1,6 @@
 package com.itspace.job.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.List;
@@ -13,13 +10,14 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+@ToString(exclude = "blogs")
 public class BlogCategory {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String name;
-    @ManyToMany(mappedBy = "blogCategories")
+    @ManyToMany(mappedBy = "blogCategories",cascade={CascadeType.ALL})
     private List<Blog> blogs;
 
 }
