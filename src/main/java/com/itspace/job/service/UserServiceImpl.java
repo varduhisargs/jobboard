@@ -1,5 +1,6 @@
 package com.itspace.job.service;
 
+import com.itspace.job.dto.RegisterUserDto;
 import com.itspace.job.model.User;
 import com.itspace.job.model.UserRole;
 import com.itspace.job.repository.UserRepository;
@@ -28,14 +29,16 @@ public class UserServiceImpl implements UserService {
 
 
     @Override
-    public User register(User user) {
-        User byEmail = userRepository.findByEmail(user.getEmail());
+    public User register(RegisterUserDto registerUserDto) {
+        User byEmail = userRepository.findByEmail(registerUserDto.getEmail());
+        User user = new User();
         if (byEmail == null) {
-            user.setPassword(passwordEncoder.encode(user.getPassword()));
+            user.setPassword(passwordEncoder.encode(registerUserDto.getPassword()));
             UserRole userRoleByName = userRoleRepository.findByName("user");
             List<UserRole> all = new ArrayList<>();
             all.add(userRoleByName);
             user.setUserRoles(all);
+            mapper.map(registerUserDto,user);
             return userRepository.save(user);
         }
         return null;

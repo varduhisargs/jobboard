@@ -1,6 +1,7 @@
 package com.itspace.job.endpoint;
 
 import com.itspace.job.dto.RegisterUserDto;
+import com.itspace.job.dto.UserDto;
 import com.itspace.job.model.User;
 import com.itspace.job.service.UserService;
 import org.modelmapper.ModelMapper;
@@ -21,13 +22,14 @@ public class UserEndPoint {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<RegisterUserDto> register(@RequestBody User user) {
-        user = userService.register(user);
+    public ResponseEntity<UserDto> register(@RequestBody RegisterUserDto registerUserDto) {
+
+        User user = userService.register(registerUserDto);
         if (user != null) {
-            RegisterUserDto userDto = mapper.map(user, RegisterUserDto.class);
+            UserDto userDto = mapper.map(user, UserDto.class);
             return ResponseEntity.ok(userDto);
         }
-        return ResponseEntity.status(403).build();
+        return ResponseEntity.status(400).build();
     }
 
 }
