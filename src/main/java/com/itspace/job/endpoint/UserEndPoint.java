@@ -1,10 +1,13 @@
 package com.itspace.job.endpoint;
 
+import com.itspace.job.dto.LoginResponseDto;
+import com.itspace.job.dto.LoginUser;
 import com.itspace.job.dto.RegisterUserDto;
 import com.itspace.job.dto.UserDto;
 import com.itspace.job.model.User;
 import com.itspace.job.service.UserService;
 import org.modelmapper.ModelMapper;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -30,6 +33,14 @@ public class UserEndPoint {
             return ResponseEntity.ok(userDto);
         }
         return ResponseEntity.status(400).build();
+    }
+    @PostMapping("/login")
+    public  ResponseEntity<LoginResponseDto> login(@RequestBody LoginUser loginUser){
+        LoginResponseDto login = userService.login(loginUser);
+        if (login != null){
+            return ResponseEntity.ok(login);
+        }
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
     }
 
 }

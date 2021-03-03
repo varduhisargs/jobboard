@@ -19,4 +19,5 @@ public class UserRole {
     private String name;
     @ManyToMany(mappedBy = "userRoles", cascade = {CascadeType.ALL})
     private List<User> users;
+
 }
