@@ -50,9 +50,9 @@ public class UserServiceImpl implements UserService {
     @Override
     public LoginResponseDto login(LoginUser loginUser) {
         User byEmail = userRepository.findByEmail(loginUser.getEmail());
-        if (byEmail != null && passwordEncoder.matches(loginUser.getPassword(), byEmail.getPassword())){
+        if (byEmail != null && passwordEncoder.matches(loginUser.getPassword(), byEmail.getPassword())) {
             String token = jwtUtil.generateToken(loginUser.getEmail(), new DefaultClaims());
-            UserDto userDto = mapper.map(byEmail,UserDto.class);
+            UserDto userDto = mapper.map(byEmail, UserDto.class);
             userDto.setUserRole(new ArrayList<>());
             for (UserRole userRole : byEmail.getUserRoles()) {
                 userDto.getUserRole().add(mapper.map(userRole, UserRoleDto.class));
@@ -61,6 +61,21 @@ public class UserServiceImpl implements UserService {
                     .token(token)
                     .user(userDto)
                     .build();
+        }
+        return null;
+    }
+
+    @Override
+    public User update(UserDto userDto) {
+        User byEmail = userRepository.findByEmail(userDto.getEmail());
+        User user = new User();
+        if (byEmail != null) {
+            mapper.map(userDto, user);
+            UserRole userRoleByName = userRoleRepository.findByName("user");
+            List<UserRole> all = new ArrayList<>();
+            all.add(userRoleByName);
+            user.setUserRoles(all);
+            return userRepository.save(user);
         }
         return null;
     }
