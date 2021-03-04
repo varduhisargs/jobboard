@@ -5,13 +5,14 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
 public class UserDto {
-
 
     private long id;
     private String name;
@@ -22,6 +23,6 @@ public class UserDto {
     private String facebook;
     private String twitter;
     private String whatsapp;
-
+    private List<UserRoleDto> userRole;
 
 }

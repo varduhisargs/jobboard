@@ -23,4 +23,5 @@ public class Company {
     private String name;
     private String location;
     private String photo;
+
 }

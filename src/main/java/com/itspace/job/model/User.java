@@ -25,7 +25,7 @@ public class User {
     private String facebook;
     private String twitter;
     private String whatsapp;
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "users_roles", joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "user_role_id"))
     private List<UserRole> userRoles;
@@ -36,6 +36,5 @@ public class User {
     @OneToOne
     @JoinColumn(name = "resume_id", referencedColumnName = "id")
     private Resume resume;
-
 
 }

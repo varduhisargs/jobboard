@@ -19,4 +19,5 @@ public class JobCategory {
     private String name;
     @ManyToMany(mappedBy = "jobCategories",cascade={CascadeType.ALL})
     private List<Job> jobs;
+
 }

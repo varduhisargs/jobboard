@@ -25,4 +25,5 @@ public class Resume {
     private String content;
     @OneToOne
     private User user;
+
 }

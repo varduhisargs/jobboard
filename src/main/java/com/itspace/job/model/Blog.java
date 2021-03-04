@@ -26,5 +26,4 @@ public class Blog {
             inverseJoinColumns = @JoinColumn(name = "category_id"))
     private List<BlogCategory> blogCategories;
 
-
 }
